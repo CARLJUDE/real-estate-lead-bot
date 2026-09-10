@@ -18,8 +18,12 @@ All project specifications and design documents live here.
 | Deployment Spec | [DEPLOYMENT_SPEC.md](./DEPLOYMENT_SPEC.md) | VPS / Docker deployment |
 | Development Setup | [DEVELOPMENT_SETUP.md](./DEVELOPMENT_SETUP.md) | How to develop the project |
 
-Root-level tracking documents:
+Root-level tracking documents (kept at repository root):
 
 - `../IMPLEMENTATION.md` — Engineering progress log
 - `../TASK.md` — Task tracker
 - `../README.md` — Project overview
+- `../LICENSE`
+
+> **Note:** Full specification content is being consolidated into this `docs/` tree.  
+> If any file still shows a short placeholder, the complete original remains available in git history from the initial commits.
