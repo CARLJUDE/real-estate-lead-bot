@@ -178,343 +178,599 @@ The MVP can use a simple point-based system.
 
 | Condition | Points |
 |---|---:|
-| Clear BUY / RENT / SELL / LAND intent | 20 |
-| Property enquiry / investment interest | 12 |
-| General enquiry | 5 |
-| Unclear / no intent | 0 |
+| Clear BUY/RENT/SELL/LAND intent | +20 |
+| General property enquiry | +10 |
+| Unknown intent | +0 |
+
+---
 
 ## Property Requirement — Maximum 15 Points
 
 | Condition | Points |
 |---|---:|
-| Specific property type + bedrooms | 15 |
-| Property type only | 10 |
-| Vague requirement | 5 |
-| No requirement stated | 0 |
+| Specific property type | +10 |
+| Specific bedrooms/size requirement | +5 |
+| No clear property requirement | +0 |
+
+---
 
 ## Location — Maximum 15 Points
 
 | Condition | Points |
 |---|---:|
-| Specific area / neighbourhood | 15 |
-| Broad city / region | 8 |
-| Unclear location | 3 |
-| No location | 0 |
+| Specific location | +15 |
+| General area/region | +8 |
+| No location | +0 |
+
+---
 
 ## Budget — Maximum 20 Points
 
 | Condition | Points |
 |---|---:|
-| Clear budget range | 20 |
-| Approximate budget | 12 |
-| Budget mentioned vaguely | 6 |
-| No budget | 0 |
+| Clear budget/range | +20 |
+| Approximate budget | +10 |
+| No budget information | +0 |
+
+The system should not assume that a customer is wealthy or unqualified simply because their budget is high or low.
+
+The budget should primarily measure **how actionable the enquiry is**.
+
+---
 
 ## Timeline — Maximum 20 Points
 
-| Condition | Points |
+| Timeline | Points |
 |---|---:|
-| Immediate / within 1 month | 20 |
-| Within 3 months | 15 |
-| Within 6 months | 10 |
-| Researching / longer | 5 |
-| No timeline | 0 |
+| Immediate | +20 |
+| Within 1 month | +18 |
+| Within 3 months | +15 |
+| Within 6 months | +10 |
+| Researching | +5 |
+| Unknown | +0 |
+
+---
 
 ## Contact Information — Maximum 10 Points
 
 | Condition | Points |
 |---|---:|
-| Name + phone or email | 10 |
-| Phone or email only | 6 |
-| Name only | 3 |
-| No contact details | 0 |
+| Phone available | +5 |
+| Email available | +3 |
+| Name available | +2 |
 
 ---
 
-# 6. Score Calculation
+# 6. Maximum Score
+
+The maximum possible score is:
 
 ```text
-TOTAL = Intent + Property Requirement + Location + Budget + Timeline + Contact
+20 + 15 + 15 + 20 + 20 + 10 = 100
 ```
 
-Maximum total: **100**
-
----
-
-# 7. Classification Rules
+Therefore:
 
 ```text
-80–100 → HOT
-60–79  → WARM
-30–59  → COLD
-0–29   → UNQUALIFIED
+Lead Score = 0–100
 ```
 
 ---
 
-# 8. Recommended Actions by Classification
+# 7. Example Qualification
 
-### HOT
+Customer message:
 
-- Notify sales team immediately.
-- Prioritize follow-up.
-- Assign to an agent if assignment is enabled.
+```text
+Hi, I'm looking for a 3-bedroom apartment around Lekki.
+My budget is around ₦80 million and I want to buy within
+the next two months. My name is John and my phone number is
+080XXXXXXXX.
+```
 
-### WARM
+The system could calculate:
 
-- Keep in active pipeline.
-- Continue qualification questions if needed.
-- Follow up within a reasonable time.
+```text
+Intent
+BUY = +20
 
-### COLD
+Property
+Apartment + 3 bedrooms = +15
 
-- Continue light nurturing.
-- Ask for missing information.
-- Do not discard.
+Location
+Lekki = +15
 
-### UNQUALIFIED
+Budget
+₦80 million = +20
 
-- Request essential missing information.
-- Do not push aggressive sales contact.
-- Re-evaluate when more data arrives.
+Timeline
+Within 3 months = +15
+
+Contact
+Phone + name = +7
+```
+
+Total:
+
+```text
+92 / 100
+```
+
+Classification:
+
+```text
+HOT
+```
+
+Action:
+
+```text
+Notify Sales Team
+```
 
 ---
 
-# 9. Progressive Qualification
+# 8. Another Example
 
-A lead does not need a complete score on the first message.
+Customer:
+
+```text
+Hello, I want to buy a house someday.
+```
+
+Possible score:
+
+```text
+Intent = +20
+Property = +0
+Location = +0
+Budget = +0
+Timeline = +5
+Contact = +0
+
+Total = 25
+```
+
+Classification:
+
+```text
+UNQUALIFIED
+```
+
+The bot should not reject the customer.
+
+Instead, it should continue the conversation and collect useful information.
+
+---
+
+# 9. Qualification Is Not Customer Rejection
+
+This is important.
+
+A low score does **not** mean:
+
+```text
+Customer is bad.
+```
+
+It means:
+
+```text
+There is currently not enough information or urgency
+to prioritize this lead.
+```
+
+The customer can become a HOT lead later.
+
+For example:
+
+```text
+First message
+→ Score: 25
+
+Customer provides budget
+→ Score: 45
+
+Customer provides location and property type
+→ Score: 70
+
+Customer confirms purchase within one month
+→ Score: 88
+```
+
+The score should therefore be recalculated when important information changes.
+
+---
+
+# 10. When To Recalculate
+
+Recalculate the lead score when:
+
+- New customer information is extracted.
+- Budget changes.
+- Location changes.
+- Property requirement changes.
+- Timeline changes.
+- Intent changes.
+- Contact information is added.
+- The lead moves through the sales process.
+
+The system should avoid recalculating unnecessarily when nothing relevant has changed.
+
+---
+
+# 11. Lead Classification Actions
+
+## HOT
+
+```text
+Score: 80–100
+```
+
+Recommended action:
+
+```text
+Save Lead
+   ↓
+Notify Sales Team
+   ↓
+Mark as Priority
+   ↓
+Continue Customer Conversation
+```
+
+The sales team should be encouraged to follow up quickly.
+
+---
+
+## WARM
+
+```text
+Score: 60–79
+```
+
+Recommended action:
+
+```text
+Save Lead
+   ↓
+Normal Sales Follow-up
+   ↓
+Continue Qualification
+```
+
+---
+
+## COLD
+
+```text
+Score: 30–59
+```
+
+Recommended action:
+
+```text
+Save Lead
+   ↓
+Continue Qualification
+   ↓
+Nurture / Follow-up
+```
+
+---
+
+## UNQUALIFIED
+
+```text
+Score: 0–29
+```
+
+Recommended action:
+
+```text
+Save Lead
+   ↓
+Ask Useful Questions
+   ↓
+Continue Qualification
+```
+
+The system should not automatically discard unqualified leads.
+
+---
+
+# 12. Required Information
+
+The bot should prioritize collecting information that helps the sales team.
+
+The most important fields are:
+
+```text
+Intent
+Property Type
+Location
+Budget
+Timeline
+```
+
+Secondary information:
+
+```text
+Name
+Phone
+Email
+Bedrooms
+```
+
+The exact priority can be adjusted based on PrimeHomes Realty's sales process.
+
+---
+
+# 13. Progressive Qualification
+
+The bot should not overwhelm customers with a long form.
+
+Instead of asking:
+
+```text
+What is your name?
+What is your email?
+What is your phone?
+What property do you want?
+How many bedrooms?
+Where do you want it?
+What is your budget?
+When do you want it?
+Do you want to buy or rent?
+```
+
+The bot should have a natural conversation.
+
+Example:
+
+### Customer
+
+```text
+I need an apartment in Lekki.
+```
+
+### Bot
+
+```text
+Sure. Are you looking to buy or rent, and how many bedrooms
+would you like?
+```
+
+Then:
+
+### Customer
+
+```text
+I want to buy a 3-bedroom.
+```
+
+### Bot
+
+```text
+Great. What budget range are you working with, and how soon
+are you looking to make the purchase?
+```
+
+This makes qualification feel like a conversation rather than a questionnaire.
+
+---
+
+# 14. Missing Information
+
+The system should identify missing high-value information.
 
 Example:
 
 ```text
-Customer: "I want a house in Lekki."
-Score may be low.
-Bot asks for budget and timeline.
-Customer provides more details.
-Score is recalculated.
+Intent: BUY
+Property: APARTMENT
+Bedrooms: 3
+Location: Lekki
+Budget: Missing
+Timeline: Missing
 ```
 
-The system should recalculate when new useful information is received.
+The bot should ask for the most useful missing information.
+
+Example:
+
+```text
+Thanks! What budget range are you considering, and are you
+looking to purchase immediately or within the next few months?
+```
 
 ---
 
-# 10. Missing Information Handling
+# 15. Avoid Asking For Known Information
 
-If important fields are missing, the bot should ask useful questions rather than forcing a final classification too early.
+If the customer already provided information, the bot should not ask for it again.
 
-Priority questions often include:
+Example:
 
-1. Budget
-2. Timeline
-3. Contact details
-4. Property type / bedrooms
-5. Location refinement
+Customer:
 
-Ask only what is useful.
+```text
+I want a 3-bedroom apartment in Lekki for ₦80 million.
+```
+
+The bot should not ask:
+
+```text
+What type of property are you looking for?
+```
+
+It already knows.
 
 ---
 
-# 11. AI vs Deterministic Scoring
+# 16. Score Storage
+
+Every important score change should be stored.
+
+Example:
+
+```json id="w7u9di"
+{
+  "lead_id": "lead-123",
+  "score": 87,
+  "classification": "HOT",
+  "reason": "Customer has clear purchase intent, budget, location and timeline"
+}
+```
+
+This creates a history of how the lead changed.
+
+---
+
+# 17. Explainable Scoring
+
+The sales team should be able to understand why a lead received a score.
+
+Example:
+
+```text
+Lead Score: 87
+
+Reasons:
+✓ Clear purchase intent
+✓ Specific property requirement
+✓ Specific location
+✓ Budget provided
+✓ Purchase timeline provided
+✓ Phone number available
+```
+
+Avoid displaying unexplained AI-generated scores.
+
+The score should be based on identifiable rules.
+
+---
+
+# 18. AI's Role
+
+AI can help extract information from the conversation.
+
+For example:
+
+```text
+Customer:
+"I need a 3-bed around Lekki, budget is about 80m."
+```
+
+AI extracts:
+
+```json id="w4t8f3"
+{
+  "property_type": "APARTMENT",
+  "bedrooms": 3,
+  "location": "Lekki",
+  "budget_max": 80000000
+}
+```
+
+The scoring logic should then use these structured values.
+
+The AI should **not invent a final score without the qualification rules being applied**.
+
+---
+
+# 19. Where Qualification Logic Lives
+
+The qualification process should have one clear implementation.
+
+Recommended flow:
 
 ```text
 AI
  ↓
-Extract structured information
+Extract Structured Information
  ↓
-Application validation
+FastAPI / Qualification Service
  ↓
-Deterministic scoring rules
+Apply Qualification Rules
  ↓
-Score + Classification
+Calculate Score
+ ↓
+Store Score
 ```
 
-AI should not invent the final business score.
-
-The scoring rules should remain explicit and testable.
+n8n can orchestrate this process, but the actual scoring rules should not be duplicated in multiple places.
 
 ---
 
-# 12. Score History
+# 20. Handling Uncertain AI Extraction
 
-Each meaningful recalculation should be stored.
-
-Useful history fields:
-
-- Previous score
-- New score
-- Classification
-- Reason / contributing factors
-- Timestamp
-
----
-
-# 13. Example Scores
-
-### Example 1 — HOT
+If AI is uncertain:
 
 ```text
-Intent: BUY (20)
-Property: 3-bedroom apartment (15)
-Location: Lekki (15)
-Budget: ₦80m (20)
-Timeline: Within 1 month (20)
-Contact: phone provided (10)
-Total: 100 → HOT
+Confidence < acceptable threshold
 ```
 
-### Example 2 — WARM
-
-```text
-Intent: BUY (20)
-Property: apartment (10)
-Location: Ikeja (15)
-Budget: unknown (0)
-Timeline: within 3 months (15)
-Contact: name only (3)
-Total: 63 → WARM
-```
-
-### Example 3 — COLD
-
-```text
-Intent: general enquiry (5)
-Property: house (10)
-Location: Lagos (8)
-Budget: unknown (0)
-Timeline: researching (5)
-Contact: none (0)
-Total: 28 → borderline UNQUALIFIED / COLD depending on exact rules
-```
-
----
-
-# 14. Recalculation Triggers
-
-Recalculate when:
-
-- New budget is provided
-- Timeline changes
-- Location becomes more specific
-- Property requirements become clearer
-- Contact details are added
-- Intent becomes clearer
-
----
-
-# 15. Human Override
-
-Sales staff should be able to override classification when needed.
-
-The system should record:
-
-- Who changed it
-- Why it was changed
-- When it was changed
-
----
-
-# 16. What Qualification Must Not Do
-
-- Invent missing customer data
-- Assume budget
-- Assume location
-- Permanently discard low-scoring leads
-- Rely solely on AI judgment for the final score
-- Confuse extraction confidence with business value
-
----
-
-# 17. Testing Scenarios
-
-The qualification logic should be tested with:
-
-- Complete HOT leads
-- Incomplete first messages
-- Progressive multi-message qualification
-- Missing budget
-- Missing contact details
-- Research-only customers
-- Human-agent requests
-- Score boundary cases (29/30, 59/60, 79/80)
-
----
-
-# 18. Implementation Location
-
-Recommended ownership:
-
-- Extraction → AI layer
-- Validation → FastAPI / application layer
-- Scoring → dedicated qualification service or deterministic workflow step
-- Storage → PostgreSQL
-
-Do not duplicate scoring rules across React, FastAPI, and n8n.
-
----
-
-# 19. Output Contract Example
-
-```json
-{
-  "score": 87,
-  "classification": "HOT",
-  "breakdown": {
-    "intent": 20,
-    "property_requirement": 15,
-    "location": 15,
-    "budget": 20,
-    "timeline": 15,
-    "contact": 2
-  },
-  "missing_fields": ["phone", "email"],
-  "recommended_action": "NOTIFY_SALES"
-}
-```
-
----
-
-# 20. Clarification Preference
-
-When information is ambiguous, prefer asking the customer to clarify rather than guessing.
+the system should not blindly use the information.
 
 Example:
+
+Customer:
+
+```text
+I need something around 50-ish.
+```
+
+The system should clarify:
 
 ```text
 Just to confirm, is your budget around ₦50 million?
 ```
+
+The system should prefer confirmation over guessing.
 
 ---
 
 # 21. Important Qualification Rules
 
 ### Rule 1
+
 Never invent missing customer information.
 
 ### Rule 2
+
 Never assume budget.
 
 ### Rule 3
+
 Never assume location.
 
 ### Rule 4
+
 Never assume buying or renting.
 
 ### Rule 5
+
 Do not permanently classify a customer based on the first message.
 
 ### Rule 6
+
 Recalculate when important information changes.
 
 ### Rule 7
+
 Keep the scoring rules understandable.
 
 ### Rule 8
+
 A low score should not prevent future qualification.
 
 ### Rule 9
+
 AI extraction and lead scoring are separate processes.
 
 ### Rule 10
+
 Sales staff should be able to understand why a lead received its classification.
 
 ---
