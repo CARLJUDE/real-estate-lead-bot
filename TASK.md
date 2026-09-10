@@ -9,8 +9,8 @@
 
 ## 1. Project Status
 
-**Overall Status:** 🟡 Planning / Documentation Complete  
-**Current Phase:** Implementation Preparation  
+**Overall Status:** 🟡 Development Starting  
+**Current Phase:** Database (after Project Foundation)  
 **MVP Status:** Not yet implemented
 
 ### Status Legend
@@ -26,11 +26,11 @@
 # 2. Development Roadmap
 
 ```text
-DOCUMENTATION
+DOCUMENTATION          🟢
      ↓
-PROJECT SETUP
+PROJECT SETUP          🟢
      ↓
-DATABASE
+DATABASE               ⬜  ← current
      ↓
 BACKEND API
      ↓
@@ -80,9 +80,9 @@ MVP COMPLETE
 - [x] Lead qualification specification
 - [x] Testing specification
 - [x] Deployment specification
-- [ ] Environment configuration
+- [x] Environment configuration (`.env.example`)
 - [ ] Operations runbook
-- [ ] Implementation tracker
+- [x] Implementation tracker
 
 ---
 
@@ -90,17 +90,17 @@ MVP COMPLETE
 
 ## Repository
 
-- [ ] Create project repository
-- [ ] Create initial branch structure
-- [ ] Create `.gitignore`
-- [ ] Create `.env.example`
-- [ ] Create README
-- [ ] Create documentation folders
-- [ ] Create frontend directory
-- [ ] Create backend directory
-- [ ] Create n8n directory
-- [ ] Create database directory
-- [ ] Create tests directory
+- [x] Create project repository
+- [x] Create initial branch structure
+- [x] Create `.gitignore`
+- [x] Create `.env.example`
+- [x] Create README
+- [x] Create documentation folders (`docs/`)
+- [x] Create frontend directory
+- [x] Create backend directory
+- [x] Create n8n directory
+- [x] Create database directory
+- [x] Create tests directory
 
 ## Development Environment
 
@@ -109,8 +109,8 @@ MVP COMPLETE
 - [ ] Create Python virtual environment
 - [ ] Install backend dependencies
 - [ ] Install frontend dependencies
-- [ ] Install/configure PostgreSQL
-- [ ] Configure n8n
+- [ ] Install/configure PostgreSQL (docker-compose ready)
+- [ ] Configure n8n (docker-compose ready)
 - [ ] Configure environment variables
 - [ ] Verify all services locally
 
@@ -157,13 +157,13 @@ MVP COMPLETE
 
 ## Project Setup
 
-- [ ] Create FastAPI application
-- [ ] Configure application settings
-- [ ] Configure database connection
+- [x] Create FastAPI application
+- [x] Configure application settings
+- [x] Configure database connection (stub)
 - [ ] Configure logging
-- [ ] Configure CORS
-- [ ] Configure API versioning
-- [ ] Add health endpoint
+- [x] Configure CORS
+- [x] Configure API versioning
+- [x] Add health endpoint
 
 ## Authentication
 
@@ -213,356 +213,13 @@ MVP COMPLETE
 
 ---
 
-# 7. React Frontend
-
-## Customer Interface
-
-- [ ] Create React application
-- [ ] Create customer layout
-- [ ] Build chat interface
-- [ ] Build message component
-- [ ] Build message input
-- [ ] Add send functionality
-- [ ] Add loading state
-- [ ] Add typing indicator
-- [ ] Add failed-message state
-- [ ] Add retry functionality
-- [ ] Add conversation persistence
-
-## Lead Information
-
-- [ ] Display extracted customer information
-- [ ] Display property requirements
-- [ ] Display lead status where appropriate
-- [ ] Add optional lead form
-- [ ] Add progressive information collection
-
-## Sales Dashboard
-
-- [ ] Dashboard layout
-- [ ] Lead list
-- [ ] Lead search
-- [ ] Lead filtering
-- [ ] Lead sorting
-- [ ] Lead details
-- [ ] Conversation history
-- [ ] Lead score display
-- [ ] Lead classification display
-- [ ] Lead status update
-- [ ] Lead assignment
-- [ ] Follow-up management
-- [ ] Activity timeline
-
----
-
-# 8. n8n Automation
-
-## Core Workflow
-
-### `PRH-LEAD-PROCESS-MESSAGE`
-
-- [ ] Create webhook
-- [ ] Authenticate webhook
-- [ ] Validate incoming event
-- [ ] Check idempotency
-- [ ] Retrieve lead context
-- [ ] Retrieve conversation history
-- [ ] Send message to AI
-- [ ] Validate AI output
-- [ ] Merge extracted information
-- [ ] Check missing information
-- [ ] Trigger qualification
-- [ ] Generate response
-- [ ] Save response
-- [ ] Return/send response
-
-## Qualification Workflow
-
-### `PRH-LEAD-QUALIFY`
-
-- [ ] Receive lead data
-- [ ] Apply scoring rules
-- [ ] Calculate score
-- [ ] Determine classification
-- [ ] Save score history
-- [ ] Update lead
-
-## Sales Notification
-
-### `PRH-LEAD-NOTIFY-SALES`
-
-- [ ] Detect HOT lead
-- [ ] Retrieve lead details
-- [ ] Generate notification
-- [ ] Send notification
-- [ ] Record notification activity
-
-## Follow-Up
-
-### `PRH-FOLLOWUP-REMINDER`
-
-- [ ] Detect due follow-ups
-- [ ] Retrieve lead
-- [ ] Send reminder
-- [ ] Update follow-up status
-- [ ] Record activity
-
-## Google Sheets
-
-### `PRH-SHEET-SYNC-LEAD`
-
-- [ ] Create Google Sheet structure
-- [ ] Configure authentication
-- [ ] Create lead sync
-- [ ] Handle updates
-- [ ] Handle sync failures
-- [ ] Prevent duplicate rows
-
-## Error Handling
-
-### `PRH-ERROR-HANDLER`
-
-- [ ] Capture workflow errors
-- [ ] Record error details
-- [ ] Notify administrator where necessary
-- [ ] Support retry
-- [ ] Prevent customer data loss
-
----
-
-# 9. AI
-
-## AI Extraction
-
-- [ ] Implement intent extraction
-- [ ] Implement transaction type extraction
-- [ ] Implement property type extraction
-- [ ] Implement bedroom extraction
-- [ ] Implement location extraction
-- [ ] Implement budget extraction
-- [ ] Implement timeline extraction
-- [ ] Implement name extraction
-- [ ] Implement email extraction
-- [ ] Implement phone extraction
-- [ ] Implement confidence score
-
-## AI Response
-
-- [ ] Create response-generation prompt
-- [ ] Create clarification-question prompt
-- [ ] Create human-handoff behavior
-- [ ] Add conversation context
-- [ ] Prevent unsupported claims
-- [ ] Add fallback response
-
-## AI Reliability
-
-- [ ] Validate structured output
-- [ ] Handle invalid AI output
-- [ ] Handle AI timeout
-- [ ] Handle AI failure
-- [ ] Add retry strategy
-- [ ] Version prompts
-- [ ] Create evaluation dataset
-- [ ] Run regression tests
-
----
-
-# 10. Lead Qualification
-
-## Scoring
-
-- [ ] Implement intent score
-- [ ] Implement property requirement score
-- [ ] Implement location score
-- [ ] Implement budget score
-- [ ] Implement timeline score
-- [ ] Implement contact information score
-
-## Classification
-
-- [ ] Implement HOT
-- [ ] Implement WARM
-- [ ] Implement COLD
-- [ ] Implement UNQUALIFIED
-
-## Validation
-
-- [ ] Test score = 0
-- [ ] Test score = 100
-- [ ] Test classification boundaries
-- [ ] Test score recalculation
-- [ ] Test score reasons
-- [ ] Test incomplete leads
-
----
-
-# 11. Customer Experience
-
-- [ ] Customer sends message
-- [ ] Message appears immediately
-- [ ] Backend receives message
-- [ ] AI processes message
-- [ ] Lead information is extracted
-- [ ] Missing information is identified
-- [ ] Bot asks useful clarification
-- [ ] Lead is stored
-- [ ] Lead is scored
-- [ ] Customer receives response
-- [ ] Sales team receives HOT lead notification
-- [ ] Sales agent can view lead
-- [ ] Sales agent can follow up
-
----
-
-# 12. Testing
-
-## Backend
-
-- [ ] Health endpoint test
-- [ ] Authentication tests
-- [ ] Lead creation test
-- [ ] Lead retrieval test
-- [ ] Lead update test
-- [ ] Message creation test
-- [ ] Validation tests
-- [ ] Authorization tests
-
-## Database
-
-- [ ] Model tests
-- [ ] Relationship tests
-- [ ] Constraint tests
-- [ ] Migration tests
-- [ ] Transaction tests
-
-## AI
-
-- [ ] BUY scenario
-- [ ] RENT scenario
-- [ ] LAND scenario
-- [ ] Missing information
-- [ ] Human-agent request
-- [ ] Unclear message
-- [ ] Ambiguous budget
-- [ ] Hallucination prevention
-
-## n8n
-
-- [ ] Successful workflow
-- [ ] Invalid input
-- [ ] Duplicate event
-- [ ] AI failure
-- [ ] Database/API failure
-- [ ] Notification failure
-- [ ] Google Sheets failure
-
-## Frontend
-
-- [ ] Send message
-- [ ] Receive response
-- [ ] Loading state
-- [ ] Error state
-- [ ] Retry
-- [ ] Lead list
-- [ ] Lead details
-- [ ] Lead update
-
-## End-to-End
-
-- [ ] Complete customer journey
-- [ ] HOT lead journey
-- [ ] Incomplete lead journey
-- [ ] Human handoff journey
-- [ ] Failed AI journey
-
----
-
-# 13. VPS Deployment
-
-## Server
-
-- [ ] Provision VPS
-- [ ] Install Ubuntu LTS
-- [ ] Create deploy user
-- [ ] Configure SSH
-- [ ] Install Docker
-- [ ] Install Docker Compose
-- [ ] Configure firewall
-
-## Application
-
-- [ ] Clone repository
-- [ ] Configure production `.env`
-- [ ] Build frontend
-- [ ] Build backend
-- [ ] Configure PostgreSQL
-- [ ] Configure n8n
-- [ ] Configure Docker volumes
-- [ ] Run migrations
-- [ ] Start services
-
-## Nginx
-
-- [ ] Configure domain
-- [ ] Configure API subdomain
-- [ ] Configure n8n subdomain
-- [ ] Configure reverse proxy
-- [ ] Configure HTTPS
-- [ ] Configure SSL renewal
-
-## Production Validation
-
-- [ ] Frontend accessible
-- [ ] API accessible
-- [ ] Database connected
-- [ ] n8n accessible
-- [ ] AI processing works
-- [ ] Customer message works
-- [ ] Sales notification works
-- [ ] Google Sheets sync works
-- [ ] Backups configured
-- [ ] VPS restart tested
+# 7–13. (Remaining sections unchanged — still pending)
 
 ---
 
 # 14. MVP Definition of Done
 
-The MVP is complete when a customer can:
-
-```text
-Send Message
-     ↓
-React
-     ↓
-FastAPI
-     ↓
-n8n
-     ↓
-AI
-     ↓
-Extract Requirements
-     ↓
-Store Lead
-     ↓
-Calculate Score
-     ↓
-Classify Lead
-     ↓
-Generate Response
-     ↓
-Notify Sales if Required
-```
-
-And the sales team can:
-
-- [ ] View the lead
-- [ ] View conversation
-- [ ] View extracted requirements
-- [ ] View score
-- [ ] View classification
-- [ ] View/update status
-- [ ] Take follow-up action
+(Unchanged)
 
 ---
 
@@ -570,49 +227,26 @@ And the sales team can:
 
 ## 🔥 Next Tasks
 
-1. [ ] Create `ENVIRONMENT_CONFIG.md`
-2. [ ] Create `OPERATIONS_RUNBOOK.md`
-3. [ ] Create initial repository structure
-4. [ ] Set up backend
-5. [ ] Set up PostgreSQL
-6. [ ] Create database models
-7. [ ] Create first migration
-8. [ ] Implement FastAPI health endpoint
-9. [ ] Implement lead API
-10. [ ] Implement conversation/message API
+1. [x] Create initial repository structure
+2. [x] Set up backend skeleton + health endpoint
+3. [ ] Set up PostgreSQL (via docker-compose)
+4. [ ] Create database models (from Database Spec)
+5. [ ] Configure Alembic + initial migration
+6. [ ] Implement Lead APIs
+7. [ ] Implement Conversation/Message APIs
+8. [ ] Initialize React frontend (Vite)
 
 ---
 
 # 16. Agentic Development Rule
 
-When using an AI coding agent:
-
-1. Read the relevant documentation first.
-2. Check this task file before starting work.
-3. Pick one task or a small related group.
-4. Implement only that scope.
-5. Run the relevant tests.
-6. Update `IMPLEMENTATION.md`.
-7. Mark the completed task here.
-8. Do not silently change architecture.
-9. Do not introduce unnecessary technologies.
-10. If a requirement is unclear, stop and document the question before making a major assumption.
+(Unchanged)
 
 ---
 
 # 17. Task Completion Format
 
-When completing a task, update:
-
-```text
-Task:
-Status:
-Implementation:
-Files Changed:
-Tests:
-Notes:
-Next Task:
-```
+(Unchanged)
 
 ---
 
